@@ -1,3 +1,4 @@
+//função para listar todos os eventos na pagina
 let body = document.getElementsByTagName("body")[0];
 body.onload = listEvent()
 
@@ -8,12 +9,14 @@ async function listEvent(){
 
     const listaEventos = await response.json() 
     listaEventos.forEach((evento) => {
+        let formatoData = new Date(evento.scheduled).toLocaleString()
         const card = `<article class="evento card p-5 m-3">
-        <h2>${evento.name} - ${evento.scheduled}</h2>
+        <h2>${evento.name} - ${formatoData}</h2>
         <h4>${evento.attractions}</h4>
         <p>${evento.description}.</p>
         <a id="btn"href="javascript:chamarModal()" class="btn btn-primary">reservar ingresso</a>
         </article>`;
+        console.log(formatoData)
 
       eventos.innerHTML += card
 
@@ -23,6 +26,7 @@ async function listEvent(){
 }
 }
 
+//criando e inserindo o modal na pagina, e as funções correspondentes
 const button = document.querySelectorAll("#btn")
 const modalPlace = document.querySelector("#full")
 
@@ -67,6 +71,8 @@ window.onclick = function(event) {
         chamarModal()
     }
 }
+
+//a encrenca de fazer uma reserva em um evento
 
 
 
