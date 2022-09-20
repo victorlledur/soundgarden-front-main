@@ -28,7 +28,7 @@ const poster = formulario.insertBefore(newDiv, formulario.children[2])
 
 //funções para cadastrar evento
 let eventos = [];
-
+ 
 form.onsubmit = (event) => {
     const novoEvento = {
         name: inputName.value,
