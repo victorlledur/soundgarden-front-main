@@ -9,18 +9,18 @@ async function listEvent(){
         const listaEventos = await response.json()
         listaEventos.forEach((evento) => {
             let formatoData = new Date(evento.scheduled).toLocaleString()
-            const card = ` <tr>
+            const card = `<tr>
             <th scope="row">1</th>
             <td>${formatoData}</td>
             <td>${evento.name}</td>
             <td>${evento.attractions}</td>
             <td>
                 <a href="reservas.html" class="btn btn-dark">ver reservas</a>
-                <a href="editar-evento.html" class="btn btn-secondary">editar</a>
-                <a href="excluir-evento.html" class="btn btn-danger">excluir</a>
+                <a href="editar-evento.html?id=${evento._id}" class="btn btn-secondary">editar</a>
+                <a href="excluir-evento.html?id=${evento._id}" class="btn btn-danger">excluir</a>
             </td>
         </tr>`;
-            console.log(formatoData)
+            console.log(evento)
 
             eventos.innerHTML += card
 
