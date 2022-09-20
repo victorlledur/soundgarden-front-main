@@ -8,9 +8,9 @@ async function listEvent(){
 
         const listaEventos = await response.json()
         listaEventos.forEach((evento) => {
-            let formatoData = new Date(evento.scheduled).toLocaleString()
+            let formatoData = new Date(evento.scheduled).toLocaleString()           
             const card = `<tr>
-            <th scope="row">1</th>
+            <th scope="row">${1}</th>
             <td>${formatoData}</td>
             <td>${evento.name}</td>
             <td>${evento.attractions}</td>

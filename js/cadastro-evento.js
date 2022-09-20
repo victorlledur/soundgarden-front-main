@@ -14,17 +14,20 @@ newDiv.setAttribute("class", "mb-3")
 const label = document.createElement("label")
 label.setAttribute("for", "Ilustração")
 label.setAttribute("class", "form-label")
-label.textContent = "Ilustração(URL)"
+label.textContent = "Banner"
 const input = document.createElement("input")
 input.setAttribute("type", "text")
 input.setAttribute("class", "form-control")
 input.setAttribute("id", "poster")
+const small = document.createElement("small")
+small.textContent = "adicione o link da imagem"
 newDiv.insertBefore(label, newDiv[0])
 newDiv.insertBefore(input, newDiv[1])
+newDiv.insertBefore(small, newDiv[2])
 
 const descNode = document.querySelectorAll("form mb-3")[0]
 
-const poster = formulario.insertBefore(newDiv, formulario.children[2])
+const poster = formulario.insertBefore(newDiv, formulario.children[1])
 
 //funções para cadastrar evento
 let eventos = [];
