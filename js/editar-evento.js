@@ -23,7 +23,7 @@ async function getObject() {
       const inputData = document.querySelector("#data") 
       inputData.setAttribute("value", `${formatoData}`)
       const inputLotacao = document.querySelector("#lotacao") 
-      inputLotacao.setAttribute("value", `${objeto.number_tickets}`)
+      inputLotacao.setAttribute("value", `${objeto.number_tickets}`)      
     }
     catch {
       console.log("error")
@@ -42,50 +42,30 @@ const inputLotacao = document.querySelector("#lotacao");
 const enviar = document.querySelector(".btn btn-primary");
 
 //funções para atualizar evento
-let eventos = [];
- 
-form.onsubmit = (event) => {
+
+form.onsubmit = async (event) => {
+    event.preventDefault()
     const novoEvento = {
         name: inputName.value,
         poster: inputBanner.value,
         attractions: inputAtracoes.value.split(","),
         description: inputDescricao.value,
-        scheduled: parseDate(inputData.value),
+        scheduled: new Date(inputData.value).toISOString(),
         number_tickets: inputLotacao.value
     }
-    event.preventDefault()
-    eventos.push(novoEvento)
-    cadastrarEvento()
-}
-
-function parseDate(value) {
-    [date, hour] = value.split(" ")
-    date = date.split("/").reverse()
-    date[0] = "20" + date[0]
-    return `${date.join("-")}T${hour}:00.000Z`
-}
-
-function cadastrarEvento() {
-    eventos.forEach((evento) => {
-        console.log(evento)
-        console.log(JSON.stringify(evento),)
-        try {        
-            fetch(`https://xp41-soundgarden-api.herokuapp.com/events/${myParam}`, {
-                method: "PUT",
-                body: JSON.stringify(evento),
-                headers: { "Content-type": "application/json; charset=UTF-8" }
-            }).then((res) => {
-                return res.json()
-            }).then((res) => {
-                console.log(res)
-                if(res.code == '201') {
-                    alert('Evento criado!')
-                }
-            });
+    try {
+        const res = await fetch(`https://xp41-soundgarden-api.herokuapp.com/events/${myParam}`, {
+            method: "PUT",
+            body: JSON.stringify(novoEvento),
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+        })
+        if (res.status == 200) {
+            alert('Evento editado com sucesso!')
         }
-        catch (error) {
-            console.log(error);
-        }
-        });
-       
-}
+        const eventoCriado = await res.json()
+        console.log(eventoCriado)
+    }
+    catch (error) {
+        console.log(error);
+    }
+};

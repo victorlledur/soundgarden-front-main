@@ -69,7 +69,8 @@ footer nav ul li {
     margin: 15% auto;
     padding: 20px;
     border-radius: 5px;
-    width: 70%;
+    width: 50%;
+    height: 20;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -178,6 +179,15 @@ footer nav ul li {
     -webkit-animation-duration: 1.5s;
     animation-name: fade;
     animation-duration: 1.5s;
+}
+.modalinputs{
+    width: 30vw;
+    border-radius: 10px;
+    border-style: 1px;
+}
+#modalconfirm{
+    border-radius: 10px;
+    border-style: 1px;
 }
 
 @-webkit-keyframes fade {
