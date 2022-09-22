@@ -30,6 +30,7 @@ form.onsubmit = async (event) => {
         })
         if (res.status == 200) {
             alert('Evento editado com sucesso!')
+            window.location.replace('/admin.html')
         }
         const eventoCriado = await res.json()
         console.log(eventoCriado)
