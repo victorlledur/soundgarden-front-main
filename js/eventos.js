@@ -84,15 +84,15 @@ function chamarModal(event){
         const inputEventId = document.getElementById("eventid")
         const eventId = event.target.getAttribute("data")
         inputEventId.value = eventId
+        console.log(inputEventId.value)
     }
 }
 
 const mbtn = document.querySelector("#modalconfirm")
-mbtn.addEventListener("click", chamarModal)
 
 window.onclick = function(event) {
     if(event.target == modal){
-        chamarModal()
+        modal.style.display = "none"
     }
 }
 
@@ -114,7 +114,8 @@ mbtn.onclick = async () => {
             headers: { "Content-type": "application/json; charset=UTF-8" }
         })
         if (res.status == 201) {
-            alert('Evento criado!')
+            alert('Reserva feita com sucesso!')
+            modal.style.display = "none"
         }
         const eventoCriado = await res.json()
         console.log(eventoCriado)
