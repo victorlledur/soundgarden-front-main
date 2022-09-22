@@ -10,8 +10,8 @@ async function getObject() {
     const objeto = await response.json()
     console.log(objeto)
 
-    // let formatoData = objeto.scheduled.slice(0, -1)
-    let formatoData = new Date(objeto.scheduled).toLocaleString()
+    let formatoData = objeto.scheduled.slice(0, -1)
+    // let formatoData = new Date(objeto.scheduled).toLocaleString()
     const inputName = document.querySelector("#nome")
     inputName.setAttribute("value", `${objeto.name}`)
     const inputBanner = document.querySelector("#banner")
