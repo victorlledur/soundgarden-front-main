@@ -14,63 +14,50 @@ newDiv.setAttribute("class", "mb-3")
 const label = document.createElement("label")
 label.setAttribute("for", "Ilustração")
 label.setAttribute("class", "form-label")
-label.textContent = "Ilustração(URL)"
+label.textContent = "Banner"
 const input = document.createElement("input")
 input.setAttribute("type", "text")
 input.setAttribute("class", "form-control")
 input.setAttribute("id", "poster")
+const small = document.createElement("small")
+small.textContent = "adicione o link da imagem"
 newDiv.insertBefore(label, newDiv[0])
 newDiv.insertBefore(input, newDiv[1])
+newDiv.insertBefore(small, newDiv[2])
 
 const descNode = document.querySelectorAll("form mb-3")[0]
 
-const poster = formulario.insertBefore(newDiv, formulario.children[2])
+const poster = formulario.insertBefore(newDiv, formulario.children[1])
 
 //funções para cadastrar evento
-let eventos = [];
- 
-form.onsubmit = (event) => {
+
+form.onsubmit = async (event) => {
+    event.preventDefault()
     const novoEvento = {
         name: inputName.value,
         poster: poster.children[1].value,
         attractions: inputAtracoes.value.split(","),
         description: inputDescricao.value,
-        scheduled: parseDate(inputData.value),
+        scheduled: new Date(inputData.value).toISOString(),
         number_tickets: inputLotacao.value
     }
-    event.preventDefault()
-    eventos.push(novoEvento)
-    cadastrarEvento()
-}
-
-function parseDate(value) {
-    [date, hour] = value.split(" ")
-    date = date.split("/").reverse()
-    date[0] = "20" + date[0]
-    return `${date.join("-")}T${hour}:00.000Z`
-}
-
-function cadastrarEvento() {
-    eventos.forEach((evento) => {
-        console.log(evento)
-        console.log(JSON.stringify(evento),)
-        try {        
-            fetch('https://xp41-soundgarden-api.herokuapp.com/events', {
-                method: "POST",
-                body: JSON.stringify(evento),
-                headers: { "Content-type": "application/json; charset=UTF-8" }
-            }).then((res) => {
-                return res.json()
-            }).then((res) => {
-                console.log(res)
-                if(res.code == '201') {
-                    alert('Evento criado!')
-                }
-            });
+    try {
+        const res = await fetch('https://xp41-soundgarden-api.herokuapp.com/events', {
+            method: "POST",
+            body: JSON.stringify(novoEvento),
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+        })
+        if (res.status == 201) {
+            alert('Evento criado!')
         }
-        catch (error) {
-            console.log(error);
-        }
-        });
-       
-}
+        const eventoCriado = await res.json()
+        console.log(eventoCriado)
+    }
+    catch (error) {
+        console.log(error);
+    }
+};
+
+
+
+
