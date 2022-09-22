@@ -7,9 +7,10 @@ body.onload = listReservas()
 async function listReservas(){
     try {
         const reservas = document.querySelector("#rows");
-        const response = await fetch(`https://xp41-soundgarden-api.herokuapp.com/bookings/${myParam}`);
+        const response = await fetch(`https://xp41-soundgarden-api.herokuapp.com/bookings/event/${myParam}`);
 
-        const listaBooking = await response.json();
+        const listaBooking = await response.json()
+        console.log(response)
         listaBooking.forEach((evento, index) => {           
             const card = `<tr>
             <th scope="row">${index+1}</th>
