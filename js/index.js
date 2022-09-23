@@ -9,8 +9,8 @@ async function getImagea() {
     imgPlace.setAttribute("src", `${primeiraImagem.poster}`)
     textPlace.textContent = `${primeiraImagem.name}`
   }
-  catch {
-    console.log("error")
+  catch (error) {
+    console.log(error)
   }
 }
 getImagea()
@@ -26,8 +26,8 @@ async function getImageb() {
     imgPlace.setAttribute("src", `${segundaImagem.poster}`)
     textPlace.textContent = `${segundaImagem.name}`
   }
-  catch {
-    console.log("error")
+  catch (error) {
+    console.log(error)
   }
 }
 getImageb()
@@ -43,8 +43,8 @@ async function getImagec() {
     imgPlace.setAttribute("src", `${terceiraImagem.poster}`)
     textPlace.textContent = `${terceiraImagem.name}`
   }
-  catch {
-    console.log("error")
+  catch (error) {
+    console.log(error)
   }
 }
 getImagec()
@@ -103,8 +103,8 @@ async function listEvent() {
       eventos.innerHTML += card
 
     };
-  } catch {
-    console.log("error")
+  } catch (error) {
+    console.log(error)
   }
   const listaDeBotoes = document.querySelectorAll(".abrirmodal")
 listaDeBotoes.forEach((botao) => {

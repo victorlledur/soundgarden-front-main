@@ -25,8 +25,8 @@ async function getObject() {
     const inputLotacao = document.querySelector("#lotacao")
     inputLotacao.setAttribute("value", `${objeto.number_tickets}`)
   }
-  catch {
-    console.log("error")
+  catch (error) {
+    console.log(error)
   }
 }
 
