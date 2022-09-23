@@ -12,7 +12,7 @@ form.onsubmit = async (event) => {
     })
     if (res.status == 204) {
       alert('evento deletado!')
-      window.location.replace('/admin.html')
+      window.location.replace('/soundgarden-front-main/admin.html')
     }
   }
   catch (error) {
